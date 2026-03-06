@@ -35,7 +35,6 @@
     "react-native-svg": "15.2.0",
     "@react-native-community/datetimepicker": "8.0.1",
     "date-fns": "^3.6.0",
-    "@react-native-voice/voice": "^3.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
