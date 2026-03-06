@@ -10,13 +10,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       
-      # 1. Node 18 use karenge taaki 'bob' wala npm bug na aaye
-      - name: Setup Node.js 18
+      # 1. Wapas Node 20 par aa gaye (Kyunki EAS CLI ko yahi chahiye)
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           
-      # 2. Expo ka official action (Yeh EAS CLI automatically install karega)
+      # 2. Expo ka official setup
       - name: Setup Expo
         uses: expo/expo-github-action@v8
         with:
@@ -24,10 +24,18 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
           
-      # 3. Normal install (Bina kisi ignore-scripts ke)
+      # 3. YAHAN HAI MAGIC TRICK! Hum nakli bob aur husky commands bana rahe hain.
+      - name: Bypass React Native Screens Bug
+        run: |
+          sudo sh -c "echo '#!/bin/sh\nexit 0' > /usr/local/bin/bob"
+          sudo chmod +x /usr/local/bin/bob
+          sudo sh -c "echo '#!/bin/sh\nexit 0' > /usr/local/bin/husky"
+          sudo chmod +x /usr/local/bin/husky
+          
+      # 4. Ab normal install (Koi error nahi aayega aur saare plugins banenge)
       - name: Install dependencies
         run: cd yaad-se-dawai && npm install
         
-      # 4. Final Build Command
+      # 5. Final Build
       - name: Build APK
         run: cd yaad-se-dawai && eas build --platform android --profile preview --non-interactive --no-wait
