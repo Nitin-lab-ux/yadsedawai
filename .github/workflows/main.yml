@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
-        run: cd yaad-se-dawai && npm install
+        run: cd yaad-se-dawai && npm install --ignore-scripts
       - name: Install EAS CLI
         run: npm install -g eas-cli
       - name: Build APK
