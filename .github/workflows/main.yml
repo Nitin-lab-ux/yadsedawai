@@ -8,13 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          
       - name: Install dependencies
-        run: cd yaad-se-dawai && npm install --ignore-scripts
+        run: |
+          npm install -g react-native-builder-bob husky
+          cd yaad-se-dawai && npm install
+          
       - name: Install EAS CLI
         run: npm install -g eas-cli
+        
       - name: Build APK
         run: cd yaad-se-dawai && eas build --platform android --profile preview --non-interactive --no-wait
         env:
