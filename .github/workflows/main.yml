@@ -13,14 +13,14 @@ jobs:
         with:
           node-version: '20'
           
+      # Yeh line saare packages layegi, bina kisi faltu error/script ke
+      - name: Install dependencies
+        run: cd yaad-se-dawai && yarn install --ignore-scripts
+          
       - name: Install EAS CLI
         run: npm install -g eas-cli
         
-      # 'npm install' ya 'yarn install' wala step PURI TARAH HATA DIYA HAI
-      # EAS khud saari dependencies download aur install karta hai.
-        
       - name: Build APK
-        # EAS CLI mein hum project dir pe 'eas build' run kar rahe hain
         run: cd yaad-se-dawai && eas build --platform android --profile preview --non-interactive --no-wait
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
