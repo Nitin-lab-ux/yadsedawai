@@ -34,7 +34,7 @@
     "react-native-screens": "3.31.0",
     "react-native-svg": "15.2.0",
     "@react-native-community/datetimepicker": "8.0.1",
-    "date-fns": "^3.6.0",
+    "date-fns": "^3.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
